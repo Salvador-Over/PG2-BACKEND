@@ -10,7 +10,7 @@ const jwt = require("jsonwebtoken");
 
 // Claves directas en el código (ya no usamos .env)
 const SECRET_KEY = "clave_super_secreta";
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://pg2-backend-1.onrender.com";
 
 // Configuración del correo (usa Gmail o Mailtrap)
 const transporter = nodemailer.createTransport({

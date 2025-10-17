@@ -67,28 +67,27 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// Login
+
 // Login
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
     const [rows] = await pool.query(
-      "SELECT id, nombre, email, rol, verificado FROM usuarios WHERE email = ? AND password = ?",
+      "SELECT id, nombre, email, rol FROM usuarios WHERE email = ? AND password = ?",
       [email, password]
     );
+
     if (!rows.length) return res.status(400).json({ message: "Email o contraseña incorrectos" });
 
     const user = rows[0];
-    if (!user.verificado) {
-      return res.status(403).json({ message: "Debes verificar tu cuenta antes de iniciar sesión." });
-    }
-
+    // Ya no se valida si está verificado
     res.json({ message: "Login exitoso", user });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Error del servidor" });
   }
 });
+
 
 
 
